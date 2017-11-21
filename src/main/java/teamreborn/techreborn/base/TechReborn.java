@@ -42,7 +42,7 @@ import reborncore.api.recipe.RecipeHandler;
 import reborncore.common.multiblock.MultiblockEventHandler;
 import reborncore.common.multiblock.MultiblockServerTickHandler;
 import reborncore.common.network.RegisterPacketEvent;
-import reborncore.common.util.LogHelper;
+import teamreborn.techreborn.base.TechReborn;
 import techreborn.api.TechRebornAPI;
 import techreborn.client.GuiHandler;
 import techreborn.command.TechRebornDevCommand;
@@ -54,12 +54,12 @@ import techreborn.events.BlockBreakHandler;
 import techreborn.events.TRRecipeHandler;
 import techreborn.events.TRTickHandler;
 import techreborn.init.*;
-import techreborn.lib.ModInfo;
+import teamreborn.techreborn.base.lib.ModInfo;
 import techreborn.packets.PacketAesu;
 import techreborn.packets.PacketIdsu;
 import techreborn.packets.PacketSetRecipe;
 import techreborn.packets.PacketSyncSideConfig;
-import techreborn.proxies.CommonProxy;
+import teamreborn.techreborn.base.proxy.CommonProxy;
 import techreborn.utils.StackWIPHandler;
 import techreborn.world.OilLakeGenerator;
 import techreborn.world.TechRebornWorldGen;
@@ -73,7 +73,6 @@ public class Core {
 	public static CommonProxy proxy;
 	@Mod.Instance
 	public static Core INSTANCE;
-	public static LogHelper logHelper = new LogHelper(new ModInfo());
 	public static TechRebornWorldGen worldGen;
 	public static File configDir;
 	//enable dev featues with -Dtechreborn.devFeatues=true
@@ -115,7 +114,7 @@ public class Core {
 		proxy.preInit(event);
 		//Register ModRecipes
 		ModRecipes.init();
-		logHelper.info("PreInitialization Complete");
+		TechReborn.logHelper.info("PreInitialization Complete");
 	}
 
 	@Mod.EventHandler
@@ -150,7 +149,7 @@ public class Core {
 		if (BehaviorDispenseScrapbox.dispenseScrapboxes) {
 			BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItems.SCRAP_BOX, new BehaviorDispenseScrapbox());
 		}
-		logHelper.info("Initialization Complete");
+		TechReborn.logHelper.info("Initialization Complete");
 	}
 
 	@Mod.EventHandler
@@ -162,7 +161,7 @@ public class Core {
 		proxy.postInit(event);
 
 		ModRecipes.postInit();
-		logHelper.info(RecipeHandler.recipeList.size() + " recipes loaded");
+		TechReborn.logHelper.info(RecipeHandler.recipeList.size() + " recipes loaded");
 
 		// RecipeHandler.scanForDupeRecipes();
 		// RecipeConfigManager.save();
@@ -187,7 +186,7 @@ public class Core {
 
 	@Mod.EventHandler
 	public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-		logHelper.warn("Invalid fingerprint detected for TechReborn!");
+		TechReborn.logHelper.warn("Invalid fingerprint detected for TechReborn!");
 		RebornCore.proxy.invalidFingerprints.add("Invalid fingerprint detected for TechReborn!");
 	}
 

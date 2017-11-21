@@ -53,7 +53,7 @@ import techreborn.entities.EntityNukePrimed;
 import techreborn.events.FluidBlockModelHandler;
 import techreborn.init.ModBlocks;
 import techreborn.items.ItemFrequencyTransmitter;
-import techreborn.lib.ModInfo;
+import teamreborn.techreborn.base.lib.ModInfo;
 
 public class ClientProxy extends CommonProxy {
 
